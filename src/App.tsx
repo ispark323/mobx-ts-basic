@@ -1,20 +1,17 @@
 import React from 'react';
-import { observer } from 'mobx-react';
-import store from './store';
-import './App.css';
+import { observer, inject } from 'mobx-react';
+import { TodoStore } from './stores/todoStore';
 
+interface AppProps {
+  todoStore?: TodoStore;
+}
+
+@inject('todoStore')
 @observer
-// function App() {
-class App extends React.Component<{}, {}> {
+class App extends React.Component<AppProps, {}> {
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>{store.likes}</p>
-          <button onClick={() => store.addLike()}>Add like</button>
-        </header>
-      </div>
-    );
+    const store = this.props.todoStore as TodoStore;
+    return <div>{store.todos}</div>;
   }
 }
 
