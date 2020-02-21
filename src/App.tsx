@@ -1,6 +1,8 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { TodoStore } from './stores/todoStore';
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
 
 interface AppProps {
   todoStore?: TodoStore;
@@ -11,7 +13,12 @@ interface AppProps {
 class App extends React.Component<AppProps, {}> {
   render() {
     const store = this.props.todoStore as TodoStore;
-    return <div>{store.todos}</div>;
+    return (
+      <div>
+        <TodoInput addTodo={store.addTodo} />>
+        <TodoList todos={store.todos} />>
+      </div>
+    );
   }
 }
 
